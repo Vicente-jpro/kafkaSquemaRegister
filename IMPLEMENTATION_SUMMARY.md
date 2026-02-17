@@ -45,7 +45,7 @@ When a user creates a product:
 
 ### ✅ 6. Retry Policy
 Implemented retry mechanism with:
-- **3 retry attempts** on consumer failure
+- **3 retry attempts after initial attempt** (4 total attempts) on consumer failure
 - **1000ms (1 second)** fixed backoff between retries
 - Configured using Spring Kafka's `DefaultErrorHandler`
 - Location: `KafkaConfig.java`
@@ -127,7 +127,7 @@ GET /api/products/{id}
 1. **Transactional Safety**: Product creation is transactional
 2. **Event-Driven Architecture**: Kafka-based messaging
 3. **Multiple Brokers**: 3 Kafka brokers for high availability
-4. **Retry Mechanism**: 3 automatic retries on consumer failure
+4. **Retry Mechanism**: 3 automatic retries after initial attempt (4 total) on consumer failure
 5. **JSON Serialization**: Spring's JsonSerializer/Deserializer
 6. **H2 Console**: Web-based database console
 7. **RESTful API**: Standard REST endpoints
@@ -153,7 +153,7 @@ GET /api/products/{id}
 
 ### Retry Policy
 - **Type**: Fixed backoff
-- **Max Attempts**: 3
+- **Max Attempts**: 4 (1 initial + 3 retries)
 - **Interval**: 1000ms (1 second)
 - **Implementation**: `DefaultErrorHandler` in KafkaConfig
 
@@ -234,7 +234,7 @@ http://localhost:8080/h2-console
 ✅ Product saved to database on creation  
 ✅ Message sent to topic "product-create-queue"  
 ✅ Consumer receives and processes messages  
-✅ Retry policy of 3 attempts implemented  
+✅ Retry policy: 3 retries (4 total attempts) implemented  
 ✅ Complete documentation provided  
 ✅ Test scripts created  
 
