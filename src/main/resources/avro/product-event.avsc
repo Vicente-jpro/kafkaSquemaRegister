@@ -1,0 +1,28 @@
+{
+  "type": "record",
+  "name": "ProductEvent",
+  "namespace": "com.kafka.product.avro",
+  "fields": [
+    {
+      "name": "id",
+      "type": ["null", "long"],
+      "default": null
+    },
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "description",
+      "type": "string"
+    },
+    {
+      "name": "price",
+      "type": "double"
+    },
+    {
+      "name": "quantity",
+      "type": "int"
+    }
+  ]
+}
