@@ -10,7 +10,7 @@ A Spring Boot application that demonstrates Kafka message production and consump
 - **H2 In-Memory Database** for product storage
 - **Product Management** - Create, retrieve products via REST API
 - **Kafka Producer/Consumer** - Automatic message production and consumption
-- **Retry Policy** - 3 retry attempts with 1-second intervals
+- **Retry Policy** - 3 retry attempts (4 total) with 1-second intervals
 - **Docker Compose** - Complete infrastructure setup
 
 ## Architecture
@@ -163,7 +163,7 @@ curl http://localhost:8080/api/products/1
 - **product-create-queue** - Topic for product creation events
 
 ### Retry Policy
-- **Max Attempts**: 3
+- **Max Attempts**: 4 (1 initial + 3 retries)
 - **Backoff Interval**: 1000ms (1 second)
 - Configured in `KafkaConfig.java`
 
