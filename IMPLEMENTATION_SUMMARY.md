@@ -39,7 +39,7 @@ When a user creates a product:
 1. REST API receives POST request
 2. Product is saved to H2 database
 3. ProductEventDTO is created
-4. Message is sent to Kafka topic "product-create-quee"
+4. Message is sent to Kafka topic "product-create-queue"
 5. Consumer receives and processes the message
 6. All steps logged for verification
 
@@ -146,7 +146,7 @@ GET /api/products/{id}
 ## Configuration Notes
 
 ### Kafka Topic
-- **Name**: `product-create-quee`
+- **Name**: `product-create-queue`
 - **Consumer Group**: `product-consumer-group`
 - **Auto-created**: Yes (on first message)
 - **Replication Factor**: 3 (configured in Kafka settings)
@@ -232,7 +232,7 @@ http://localhost:8080/h2-console
 ✅ H2 database integrated  
 ✅ Product entity created  
 ✅ Product saved to database on creation  
-✅ Message sent to topic "product-create-quee"  
+✅ Message sent to topic "product-create-queue"  
 ✅ Consumer receives and processes messages  
 ✅ Retry policy of 3 attempts implemented  
 ✅ Complete documentation provided  
