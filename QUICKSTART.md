@@ -102,8 +102,8 @@ Check the application logs to see:
 Example log output:
 ```
 INFO c.kafka.product.service.ProductService   : Product saved to database with id: 1
-INFO c.kafka.product.kafka.ProductProducer    : Sending product event to topic: product-create-quee
-INFO c.kafka.product.kafka.ProductConsumer    : Received product event from topic: product-create-quee
+INFO c.kafka.product.kafka.ProductProducer    : Sending product event to topic: product-create-queue
+INFO c.kafka.product.kafka.ProductConsumer    : Received product event from topic: product-create-queue
 INFO c.kafka.product.kafka.ProductConsumer    : Product event processed successfully
 ```
 
@@ -161,7 +161,7 @@ The complete flow works as follows:
 2. **Controller** → **Service Layer**
 3. **Service** → Saves to **H2 Database**
 4. **Service** → Sends message to **Kafka Producer**
-5. **Producer** → Publishes to topic **"product-create-quee"**
+5. **Producer** → Publishes to topic **"product-create-queue"**
 6. **Kafka Broker** → Stores the message
 7. **Consumer** → Receives message from topic
 8. **Consumer** → Processes message (with 3 retry attempts if fails)

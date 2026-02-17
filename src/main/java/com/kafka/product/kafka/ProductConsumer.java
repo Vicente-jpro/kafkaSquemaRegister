@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class ProductConsumer {
     
-    @KafkaListener(topics = "product-create-quee", groupId = "product-consumer-group")
+    @KafkaListener(topics = "product-create-queue", groupId = "product-consumer-group")
     public void consumeProductEvent(
             @Payload ProductEventDTO productEvent,
             @Header(KafkaHeaders.RECEIVED_TOPIC) String topic,

@@ -19,7 +19,7 @@ A Spring Boot application that demonstrates Kafka message production and consump
 User -> REST API -> Service Layer -> Database (H2)
                          |
                          v
-                  Kafka Producer -> Topic: product-create-quee
+                  Kafka Producer -> Topic: product-create-queue
                                            |
                                            v
                                     Kafka Consumer -> Process Message
@@ -151,7 +151,7 @@ curl http://localhost:8080/api/products/1
 1. **User creates a product** via REST API (`POST /api/products`)
 2. **Service layer** saves the product to H2 database
 3. **Service layer** converts the product to ProductEvent (Avro)
-4. **Kafka Producer** sends the event to `product-create-quee` topic
+4. **Kafka Producer** sends the event to `product-create-queue` topic
 5. **Schema Registry** validates and stores the Avro schema
 6. **Kafka Consumer** receives the message from the topic
 7. **Retry Policy** - If processing fails, it retries up to 3 times with 1-second intervals
@@ -160,7 +160,7 @@ curl http://localhost:8080/api/products/1
 ## Kafka Configuration
 
 ### Topics
-- **product-create-quee** - Topic for product creation events
+- **product-create-queue** - Topic for product creation events
 
 ### Retry Policy
 - **Max Attempts**: 3
@@ -195,7 +195,7 @@ docker exec -it kafka-broker-1 kafka-topics --bootstrap-server localhost:9092 --
 ```bash
 docker exec -it kafka-broker-1 kafka-console-consumer \
   --bootstrap-server localhost:9092 \
-  --topic product-create-quee \
+  --topic product-create-queue \
   --from-beginning
 ```
 

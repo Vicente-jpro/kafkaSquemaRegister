@@ -13,7 +13,7 @@ public class ProductProducer {
     
     private final KafkaTemplate<String, ProductEventDTO> kafkaTemplate;
     
-    private static final String TOPIC = "product-create-quee";
+    private static final String TOPIC = "product-create-queue";
     
     public void sendProductEvent(ProductEventDTO productEvent) {
         log.info("Sending product event to topic: {}, event: {}", TOPIC, productEvent);
