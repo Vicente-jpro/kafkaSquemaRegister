@@ -2,6 +2,7 @@ package com.kafka.product.service;
 
 import com.kafka.product.dto.ProductEventDTO;
 import com.kafka.product.entity.Product;
+import com.kafka.product.exception.ProductNotFoundException;
 import com.kafka.product.kafka.ProductProducer;
 import com.kafka.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -47,6 +48,6 @@ public class ProductService {
     
     public Product getProductById(Long id) {
         return productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+                .orElseThrow(() -> new ProductNotFoundException(id));
     }
 }

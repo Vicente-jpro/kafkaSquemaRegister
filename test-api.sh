@@ -1,10 +1,26 @@
 #!/bin/bash
 
+# Exit on any error
+set -e
+
+# Exit on undefined variables
+set -u
+
 # Test script for Kafka Schema Registry Project
 
 echo "==============================================="
 echo "Kafka Schema Registry Project - Test Script"
 echo "==============================================="
+echo ""
+
+# Check if the application is running
+echo "Checking if application is running..."
+if ! curl -s http://localhost:8080/actuator/health > /dev/null 2>&1 && ! curl -s http://localhost:8080/api/products > /dev/null 2>&1; then
+    echo "ERROR: Application is not running on port 8080"
+    echo "Please start the application first with: mvn spring-boot:run"
+    exit 1
+fi
+echo "✓ Application is running"
 echo ""
 
 # Test 1: Create a product
@@ -47,9 +63,16 @@ echo "Test 4: Retrieving product with ID 1"
 curl http://localhost:8080/api/products/1
 echo -e "\n"
 
+sleep 1
+
+# Test 5: Test 404 error
+echo "Test 5: Testing 404 error (product not found)"
+curl -w "\nHTTP Status: %{http_code}\n" http://localhost:8080/api/products/999
+echo -e "\n"
+
 echo ""
 echo "==============================================="
-echo "All tests completed!"
+echo "All tests completed successfully!"
 echo "==============================================="
 echo ""
 echo "Check the application logs to verify:"

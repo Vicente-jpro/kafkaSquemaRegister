@@ -56,10 +56,11 @@ public class KafkaConfig {
             new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         
-        // Configure retry policy with 3 attempts
-        // FixedBackOff(interval, maxAttempts): interval in ms, 3 retry attempts
+        // Configure retry policy with 3 retries (4 total attempts)
+        // FixedBackOff(interval, maxAttempts): interval in ms, maxAttempts includes initial attempt
+        // So maxAttempts=4 means: 1 initial attempt + 3 retries = 4 total attempts
         DefaultErrorHandler errorHandler = new DefaultErrorHandler(
-            new FixedBackOff(1000L, 3L) // 1 second between retries, 3 retry attempts
+            new FixedBackOff(1000L, 4L) // 1 second between retries, 3 retries (4 total attempts)
         );
         factory.setCommonErrorHandler(errorHandler);
         
